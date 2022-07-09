@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -36,3 +37,60 @@
     transform: rotate(360deg);
   }
 }
+
+.public_metrics{
+  margin: 5px 0;
+  justify-content: center;
+  background:unset;
+}
+
+.form-left{
+  padding: 5%;
+}
+
+/* coundown */
+.display-table-cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#public_metrics-box {
+  text-align: center;
+}
+
+#public_metrics-box .public_metrics-card {
+  position: relative;
+  display: inline-block;
+  margin: 12px;
+  height: 90px;
+  width: 200px;
+  border-radius: 100px;
+  box-shadow: 0px 0px 0px 5px rgb(255 255 255 / 50%);
+  background: #fff;
+  color: #333;
+  box-shadow: 1px 2px 7px black;
+}
+
+#public_metrics-box .public_metrics-card .public_metrics-text {
+  font-weight: 500;
+  line-height: 70px;
+  font-size: 2em;
+  color: #F84982;
+}
+#public_metrics-box .public_metrics-card span {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: .9em;
+  font-weight: 600;
+}
+/* coundown end */
+
+
+
+.hide-div{
+  display: none;
+}
+
+
