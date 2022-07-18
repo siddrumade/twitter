@@ -1,9 +1,7 @@
 import React from "react";
 
 class SearchComponent extends React.Component{
-    constructor(props){
-        super(props)
-    }
+    
     render(){
         return <React.Fragment>
             <form className={`form-detail ${this.props.user_id ===''? "": "hide-div"}`} onSubmit={this.props.onSubmit}>

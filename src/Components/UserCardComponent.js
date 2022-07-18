@@ -15,18 +15,14 @@ class UserCardComponent extends React.Component {
             <div className="ui raised card" >
             <div className="content">
                 <div className="header">{item['name']}</div>
-                <div className="meta">
-                    <span className="category">{item['username']}</span>
-                </div>
-                <div className="description">
-                    <p></p>
-                </div>
-            </div>
-            <div className="extra content">
                 <div className="right floated author">
                     <img className="ui avatar image" alt="matt" src={item['profile_image_url']} /> 
                 </div>
+                <div className="meta">
+                    <span className="category">{item['username']}</span>
+                </div>
             </div>
+            
         </div></React.Fragment>);
         });
         return cards_list

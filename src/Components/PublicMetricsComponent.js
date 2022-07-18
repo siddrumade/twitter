@@ -1,9 +1,7 @@
 import React from "react";
 
 class PublicMetricsComponent extends React.Component{
-    constructor(props){
-        super(props)
-    }
+    
     render(){
         return <React.Fragment>
             <div  className={`form-v6-content public_metrics ${this.props.user_id !== '' ? "": "hide-div" }`}>

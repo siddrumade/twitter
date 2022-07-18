@@ -28,7 +28,8 @@ class MainComponent extends React.Component {
             tweets_list: [],
             followers_list: [],
             following_list: [],
-            words: []
+            words: [],
+            loading : false
         }
 
         this.fetchData = this.fetchData.bind(this);
@@ -83,9 +84,10 @@ class MainComponent extends React.Component {
         fetch();
     }
 
-    analyze() {
-        this.fetch_tweets();
+    analyze() {        
+        this.setState({loading: true});
         this.fetch_following();
+        this.fetch_tweets();
         this.WordCloud();
 
 
@@ -151,7 +153,8 @@ class MainComponent extends React.Component {
                     <img className="ui large circular image" src={this.state.profile_image_url} alt="form" />
                 </div>
                 <SearchComponent onSubmit={this.fetchData} user_id={this.state.user_id} username={this.state.username} onUserInputChange={this.onUserInputChange} />
-                <InfoComponent user_id={this.state.user_id} name={this.state.name} description={this.state.description} location={this.state.location} created_at={this.state.created_at} analyze={this.analyze} />
+                <InfoComponent user_id={this.state.user_id} name={this.state.name} description={this.state.description} location={this.state.location} created_at={this.state.created_at} analyze={this.analyze} loading={this.state.loading}>
+                </InfoComponent>
             </div>
             <PublicMetricsComponent followers={this.state.followers} following={this.state.following} tweets={this.state.tweets} user_id={this.state.user_id} />
             <div className={`form-v6-content analyzer-container ${this.state.following_list.length > 0 ? "" : "hide-div"}`}>
@@ -171,7 +174,7 @@ class MainComponent extends React.Component {
                 </div>
             </div>
             <div className={`form-v6-content analyzer-container ${this.state.following_list.length > 0 ? "" : "hide-div"}`}
-                style={{ position: 'relative', height: '400px' }} >
+                style={{ position: 'relative', height: '600px' }} >
                 <div style={{ position: 'absolute', width: '45%', height: '100%', left: 0, top: 50 }}>
                     <TagCloud
                         minSize={12}

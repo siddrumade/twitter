@@ -1,12 +1,7 @@
 import React from "react";
 
 class TwitterCardComponent extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
+   
     render_card() {
         const cards_list = this.props.tweets_list.map((item) => {
             return (
@@ -14,7 +9,7 @@ class TwitterCardComponent extends React.Component {
                     <div className="ui comments">
                         {/* <h3 className="ui dividing header">Comments</h3> */}
                         <div className="comment">
-                            <a className="avatar" href="#">
+                            <a className="avatar" href="/#">
                                 <img alt="profile" src={this.props.image} />
                             </a>
                             <div className="content">

@@ -1,4 +1,3 @@
-import React from "react";
 import Chart from 'chart.js/auto';
 import axios from "axios";
 
