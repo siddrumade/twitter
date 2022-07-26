@@ -23,7 +23,7 @@ class InfoComponent extends React.Component{
                     <div className="form-row-last">
 
                     <button name="submit" onClick={this.props.analyze} className={`register ${ this.props.loading === true ? 'btn-disable':''}`}  value="Analyze Account">
-                    <i  className={`fa fa-spinner fa-spin ${ this.props.loading === true ? '':'hide-div'}`} style={{'fontSize': 24,color: "black"}}></i> Analyze Account
+                    <i  className={`fa fa-spinner fa-spin ${ this.props.loading === true ? 'slide-in-from-right':'hide-div'}`} style={{'fontSize': 24,color: "black"}}></i> Analyze Account
                     </button>
                     {/* <input type="submit" name="submit" onClick={this.props.analyze} className={`register ${ this.props.loading === true ? 'btn-disable':''}`}  value="Analyze Account" /> */}
                     </div>

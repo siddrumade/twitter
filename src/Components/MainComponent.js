@@ -29,7 +29,7 @@ class MainComponent extends React.Component {
             followers_list: [],
             following_list: [],
             words: [],
-            loading : false
+            loading: false
         }
 
         this.fetchData = this.fetchData.bind(this);
@@ -52,7 +52,7 @@ class MainComponent extends React.Component {
         const fetch = async () => {
             console.log('fetching tweets...............')
             const url = "http://127.0.0.1:8000/tweets/" + this.state.user_id
-            await axios.get(url)
+            await axios.get(url,{ crossDomain: true })
                 .then((response) => {
                     console.log('fetch tweets response---', response)
                     const data = response['data']['data'];
@@ -63,18 +63,19 @@ class MainComponent extends React.Component {
                 });
         }
         fetch();
+
     }
     WordCloud() {
         const fetch = async () => {
             const url = "http://127.0.0.1:8000/wordcloud/" + this.state.user_id
-            await axios.get(url)
+            await axios.get(url,{ crossDomain: true })
                 .then((response) => {
                     const words_dict = response['data']['data'];
                     var words = [];
                     Object.entries(words_dict).forEach(([k, v]) => {
                         words.push({ value: k, count: v });
                     });
-                    this.setState({ words : words });
+                    this.setState({ words: words });
 
                 }).catch(error => {
                     console.log('invalid user', error);
@@ -84,8 +85,8 @@ class MainComponent extends React.Component {
         fetch();
     }
 
-    analyze() {        
-        this.setState({loading: true});
+    analyze() {
+        this.setState({ loading: true });
         this.fetch_following();
         this.fetch_tweets();
         this.WordCloud();
@@ -95,7 +96,7 @@ class MainComponent extends React.Component {
     fetch_following() {
         const fetch = async () => {
             const url = "http://127.0.0.1:8000/following/" + this.state.user_id
-            await axios.get(url)
+            await axios.get(url,{ crossDomain: true })
                 .then((response) => {
                     console.log('fetch following response---', response)
                     const data = response['data']['data'];
@@ -110,7 +111,7 @@ class MainComponent extends React.Component {
     fetch_accout() {
         const fetch = async () => {
             const url = "http://127.0.0.1:8000/info/" + this.state.username
-            await axios.get(url)
+            await axios.get(url,{ crossDomain: true })
                 .then((response) => {
                     const data = response['data']['data'][0];
                     const image = data['profile_image_url'].replace('normal', '400x400');
@@ -148,44 +149,63 @@ class MainComponent extends React.Component {
 
     render() {
         return (<React.Fragment>
-            <div className="form-v6-content">
-                <div className="form-left">
-                    <img className="ui large circular image" src={this.state.profile_image_url} alt="form" />
+            <div className="col col-sm-12 col-md-12 col-lg-12 col-lg-12 col-xl-12 pd-1">
+                <div className="row">
+                    <div className="col col-sm-12 col-md-6 col-lg-6 col-lg-6 col-xl-6">
+                        <div className="col col-sm-12 col-md-12 col-lg-12 col-lg-12 col-xl-12" >
+                            <div className="form-v6-content div1">
+                                <div className="form-left">
+                                    <img className="ui large circular image" src={this.state.profile_image_url} alt="form" />
+                                </div>
+                                <SearchComponent onSubmit={this.fetchData} user_id={this.state.user_id} username={this.state.username} onUserInputChange={this.onUserInputChange} />
+                                <InfoComponent user_id={this.state.user_id} name={this.state.name} description={this.state.description} location={this.state.location} created_at={this.state.created_at} analyze={this.analyze} loading={this.state.loading}>
+                                </InfoComponent>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={`col col-sm-12 col-md-6 col-lg-6 col-lg-6 col-xl-6 following-container  ${this.state.following_list.length > 0 ? "slide-in-from-right" : "hide-div"}`}>
+                        <div className="form-v6-content div1" >
+                            <h3 className="header">{this.state.name} Following</h3>
+                            <div className="follow-container row">
+                                <UserCardComponent following_list={this.state.following_list} />
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <SearchComponent onSubmit={this.fetchData} user_id={this.state.user_id} username={this.state.username} onUserInputChange={this.onUserInputChange} />
-                <InfoComponent user_id={this.state.user_id} name={this.state.name} description={this.state.description} location={this.state.location} created_at={this.state.created_at} analyze={this.analyze} loading={this.state.loading}>
-                </InfoComponent>
-            </div>
-            <PublicMetricsComponent followers={this.state.followers} following={this.state.following} tweets={this.state.tweets} user_id={this.state.user_id} />
-            <div className={`form-v6-content analyzer-container ${this.state.following_list.length > 0 ? "" : "hide-div"}`}>
-                <div className="">
-                    <h3 className="header">{this.state.name} Following</h3>
-                    <div className="follow-container">
-                        <UserCardComponent following_list={this.state.following_list} />
+                <div className="row">
+                    <PublicMetricsComponent followers={this.state.followers} following={this.state.following} tweets={this.state.tweets} user_id={this.state.user_id} />
+                </div>
+
+                <div className="row">
+                    <div className={`col col-sm-12 col-md-12 col-lg-12 col-lg-12 col-xl-12  ${this.state.following_list.length > 0 ? "slide-in-from-right" : "hide-div"}`}>
+                        <div className="form-v6-content tweets-container-outerbox" >
+                            <h3 className="header">{this.state.name} Tweets</h3>
+                            <div className="tweets-container col col-sm-12 col-md-12 col-lg-12 col-lg-12 col-xl-12" >
+                                <div className="row">
+                                    <TwitterCardComponent tweets_list={this.state.tweets_list} username={this.state.username} image={this.state.profile_image_url_small} />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className={`form-v6-content analyzer-container ${this.state.following_list.length > 0 ? "" : "hide-div"}`}>
-                <div className="">
-                    <h3 className="header">{this.state.name} Tweets</h3>
-                    <div className="follow-container" >
-                        <TwitterCardComponent tweets_list={this.state.tweets_list} username={this.state.username} image={this.state.profile_image_url_small} />
+                <div className={` col col-sm-12 col-md-12 col-lg-12 col-lg-12 col-xl-12 form-v6-content analyzer-container ${this.state.following_list.length > 0 ? "slide-in-from-right" : "hide-div"}`}
+                    style={{ position: 'relative', height: '500px' }} >
+                    <div style={{ position: 'absolute', width: '45%', height: '100%', left: 0, top: 50 }}>
+                        <TagCloud
+                            minSize={12}
+                            maxSize={35}
+                            tags={this.state.words}
+                            onClick={tag => alert(`'${tag.value}' was selected!`)}
+                        />
+                    </div>
+                    <div style={{ position: 'absolute', width: '45%', height: '70%', right: 0, top: 50 }}>
+                        <canvas id="canvas1" ></canvas>
                     </div>
                 </div>
-            </div>
-            <div className={`form-v6-content analyzer-container ${this.state.following_list.length > 0 ? "" : "hide-div"}`}
-                style={{ position: 'relative', height: '600px' }} >
-                <div style={{ position: 'absolute', width: '45%', height: '100%', left: 0, top: 50 }}>
-                    <TagCloud
-                        minSize={12}
-                        maxSize={35}
-                        tags={this.state.words}
-                        onClick={tag => alert(`'${tag.value}' was selected!`)}
-                    />
-                </div>
-                <div style={{ position: 'absolute', width: '45%', height: '70%', right: 0, top: 50 }}>
-                    <canvas id="canvas1" ></canvas>
-                </div>
+
+
             </div>
 
 

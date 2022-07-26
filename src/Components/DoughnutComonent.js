@@ -6,9 +6,8 @@ import axios from "axios";
 const get_doughnut = async (user_id) => {
 
     const url = "http://127.0.0.1:8000/sentiments/" + user_id
-    await axios.get(url)
+    await axios.get(url,{ crossDomain: true })
         .then((response) => {
-            console.log(response, '**********************');
             donught(response['data']['text']);
         }).catch(error => {
             console.log('invalid user', error);

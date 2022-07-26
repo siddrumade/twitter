@@ -141,3 +141,53 @@
   min-height: 50px;
 }
 
+.row{
+justify-content: center !important;
+}
+
+.tweets-container-outerbox{
+	margin: 0px !important;
+  max-width: unset !important;
+}
+
+.form-v6-content.div1{
+  height: 400px;
+}
+
+
+.tweets-container-outerbox{
+  flex-direction: column;
+}
+
+
+.pd-1{
+  padding: 1%;
+}
+
+.ui.raised.card{
+  width: 45%;
+}
+
+.form-v6-content.div1 .follow-container{
+  overflow-y: scroll;
+}
+
+.following-container .div1{
+  flex-direction: column;
+}
+
+
+/* animation */
+
+.slide-in-from-right {
+  animation: 1.5s ease-out 0s 1 slideInFromRight forwards;
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

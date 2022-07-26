@@ -20,9 +20,7 @@ class TwitterCardComponent extends React.Component {
                                 <div className="text">
                                     {item.text}
                                 </div>
-                                <div className="actions">
-                                    <a className="reply">Reply</a>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>

@@ -4,7 +4,7 @@ class PublicMetricsComponent extends React.Component{
     
     render(){
         return <React.Fragment>
-            <div  className={`form-v6-content public_metrics ${this.props.user_id !== '' ? "": "hide-div" }`}>
+            <div  className={`form-v6-content public_metrics ${this.props.user_id !== '' ? "slide-in-from-right": "hide-div" }`}>
                 <div id="public_metrics-box" >
                     <div className="public_metrics-card">
                         <h3 className="public_metrics-text">{this.props.followers}</h3>

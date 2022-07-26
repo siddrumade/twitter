@@ -2,8 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    height: 80vh;
-    overflow-y: scroll;
+
 }
 .follow-container > .ui.raised.card{
     margin: 1%;
